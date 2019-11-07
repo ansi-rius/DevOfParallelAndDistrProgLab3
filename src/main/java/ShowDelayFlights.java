@@ -22,7 +22,7 @@ public class ShowDelayFlights {
                 s -> new Tuple2<>(s,1)
         );
         //считаем одинаковые слова
-        JavaPairRDD<String, Long>
+        JavaPairRDD<String, Long> 
     }
 }
 
