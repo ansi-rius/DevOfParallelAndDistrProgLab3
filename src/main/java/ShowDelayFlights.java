@@ -27,10 +27,13 @@ public class ShowDelayFlights {
         );
         //Загружаем словарь
         JavaRDD<String> dictionaryFile = sc.textFile("words.txt");
-        JavaRDD<String, Long> dictionary = dictionaryFile.mapToPair(
+        JavaPairRDD<String, Long> dictionary = dictionaryFile.mapToPair(
                 s->new Tuple2<>(s,1|)
         );
-        
+        //производим операцию join со словарем
+        JavaPairRDD<String, Tuple2<Long, Long>> joinValue = dictionary.join(collectedWords);
+        //Печатаем результат
+        System.out.println("res="+joinValue.collect());
     }
 }
 
