@@ -19,7 +19,7 @@ public class ShowDelayFlights {
         );
         //отображение слов в пару <Слово, 1>
         JavaPairRDD<String, Long> wordsWithCount = splitted.mapToPair(
-                s -> new Tuple2<>(s,1)
+                s -> new Tuple2<>(s,1|)
         );
         //считаем одинаковые слова
         JavaPairRDD<String, Long> collectedWords = wordsWithCount.reduceByKey(
@@ -27,7 +27,10 @@ public class ShowDelayFlights {
         );
         //Загружаем словарь
         JavaRDD<String> dictionaryFile = sc.textFile("words.txt");
-        JavaRDD<String, Long> dictionary = 
+        JavaRDD<String, Long> dictionary = dictionaryFile.mapToPair(
+                s->new Tuple2<>(s,1|)
+        );
+        
     }
 }
 
