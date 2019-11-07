@@ -22,7 +22,12 @@ public class ShowDelayFlights {
                 s -> new Tuple2<>(s,1)
         );
         //считаем одинаковые слова
-        JavaPairRDD<String, Long> 
+        JavaPairRDD<String, Long> collectedWords = wordsWithCount.reduceByKey(
+                (a,b) -> a + b
+        );
+        //Загружаем словарь
+        JavaRDD<String> dictionaryFile = sc.textFile("words.txt");
+        JavaRDD<String, Long> dictionary = 
     }
 }
 
