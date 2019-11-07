@@ -21,6 +21,8 @@ public class ShowDelayFlights {
         JavaPairRDD<String, Long> wordsWithCount = splitted.mapToPair(
                 s -> new Tuple2<>(s,1)
         );
+        //считаем одинаковые слова
+        JavaPairRDD<String, Long> 
     }
 }
 
