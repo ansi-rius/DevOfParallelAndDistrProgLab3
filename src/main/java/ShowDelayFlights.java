@@ -45,7 +45,9 @@ public class ShowDelayFlights {
         //создаем в основном методе main переменную broadcast сюда кидаем пары код, имя аэропорта
         final Broadcast<Map<String, String>> airportsBroadcasted =
                 sc.broadcast(airMap);
-        //
+        //c помощью функции reduce или аналогичных расчитываем максимальное
+        //время опоздания, процент опоздавших+отмененных рейсов
+        
 
     }
 }
