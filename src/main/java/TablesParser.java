@@ -11,7 +11,8 @@ public class TablesParser {
                         s -> new Tuple2<>(Hadoop s,1l)
                 );*/
         flights.mapToPair(s->new Tuple2<> ()) //s[11] - origin, s[14] - dest
-            //s[18] -
+            //s[18] - arrDelayNew s[19] - cancelled
+
         return flights;
     }
 }
