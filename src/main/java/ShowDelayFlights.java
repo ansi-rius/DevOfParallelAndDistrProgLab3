@@ -3,8 +3,10 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
+import java.util.Map;
 
 import java.util.Arrays;
+
 
 public class ShowDelayFlights {
     public static void main(String[] args) {
@@ -19,6 +21,7 @@ public class ShowDelayFlights {
                 airportsTable.filter(a-> !a.contains("Code"))
                 .map(s -> Arrays.stream(s.split(",(?=\")"))
                         .toArray(String[]::new));
+
         JavaRDD<String[]> flights =
                 flightsTable.filter(a-> !a.contains("\"YEAR\""))
                 .map(s->Arrays.stream(s.split(","))
@@ -37,7 +40,9 @@ public class ShowDelayFlights {
         //коллект эз мап — для связывания с таблицей аэропортов — предварительно выкачиваем список
         //аэропортов в главную функцию с помощью метода collectAsMap
         // collectAsMap - Collect the result as a map to provide easy lookup
-        
+        Map<String, String> airMap = codeNamePairAirport.collectAsMap();
+        //
+
     }
 }
 
