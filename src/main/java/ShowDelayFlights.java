@@ -45,8 +45,8 @@ public class ShowDelayFlights {
         //создаем в основном методе main переменную broadcast сюда кидаем пары код, имя аэропорта
         final Broadcast<Map<String, String>> airportsBroadcasted =
                 sc.broadcast(airMap);
+        //
 
-        
     }
 }
 
