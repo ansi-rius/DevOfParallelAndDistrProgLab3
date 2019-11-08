@@ -42,7 +42,8 @@ public class ShowDelayFlights {
         // collectAsMap - Collect the result as a map to provide easy lookup
         Map<String, String> airMap = codeNamePairAirport.collectAsMap();
         //создаем в основном методе main переменную broadcast сюда кидаем пары код, имя аэропорта
-        
+        final Broadcast<Map<String, AirportData>> airportsBroadcasted =
+                sc.broadcast(stringAirportDataMap);
 
     }
 }
