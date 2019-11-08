@@ -36,6 +36,7 @@ public class ShowDelayFlights {
         JavaPairRDD<Tuple2<String,String>, FlightKey> originDestDelayCancelledFlightTuple = TablesParser.makeFlightPair(flights); //?
         //коллект эз мап — для связывания с таблицей аэропортов — предварительно выкачиваем список
         //аэропортов в главную функцию с помощью метода collectAsMap
+        // collectAsMap - Collect the result as a map to provide easy lookup
         
     }
 }
