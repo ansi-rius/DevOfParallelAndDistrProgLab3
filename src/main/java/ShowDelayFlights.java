@@ -31,6 +31,7 @@ public class ShowDelayFlights {
         JavaPairRDD<String, String> codeNamePairAirport =
                 airports.mapToPair(a-> new Tuple2<>(a[0].replace("\"", ""), a[1]) //убрали лишнее
                 );
+
         
     }
 }
