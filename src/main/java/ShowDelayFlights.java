@@ -18,8 +18,19 @@ public class ShowDelayFlights {
         JavaRDD<String[]> airports =
                 airportsTable.filter(a-> !a.contains("Code"))
                 .map(s -> Arrays.stream(s.split(",(?=\")"))
-                .toArray(String[]::new));
+                        .toArray(String[]::new));
         JavaRDD<String[]> flights =
+                flightsTable.filter(a-> !a.contains("\"YEAR\""))
+                .map(s->Arrays.stream(s.split(","))
+                        .toArray(String[]::new));
+        //формируем пары <название аеропорта, его код>
+        /*JavaPairRDD<String, Long> dictionary =
+                dictionaryFile.mapToPair(Hadoop
+                        s -> new Tuple2<>(Hadoop s,1l)
+                );*/
+        JavaPairRDD<String, String> codeNamePairAirport =
+                airports.mapToPair(a-> new Tuple2<>(a[0].replace("\"", ""), a[1]) //убрали лишнее
+                );
 
     }
 }
