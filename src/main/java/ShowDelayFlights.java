@@ -15,7 +15,12 @@ public class ShowDelayFlights {
         JavaRDD<String> flightsTable = sc.textFile("/Users/anemone/parallelDevLabs/DevOfParallelAndDistrProgLab3/flights.csv");
         JavaRDD<String> airportsTable = sc.textFile("/Users/anemone/parallelDevLabs/DevOfParallelAndDistrProgLab3/airports.csv");
         //Разбиение строки на слова - splits распарсить..
-        JavaRDD<String[]> 
+        JavaRDD<String[]> flights =
+                flightsTable.filter(a-> !a.contains("Code"))
+                .map(s -> Arrays.stream(s.split(",(?=\")"))
+                .toArray(String[]::new));
+        JavaRDD<String[]> airports =
+
 
     }
 }
