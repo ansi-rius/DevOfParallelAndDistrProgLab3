@@ -12,7 +12,8 @@ public class ShowDelayFlights {
         SparkConf conf = new SparkConf().setAppName("example");
         JavaSparkContext sc = new JavaSparkContext(conf);
         //загрузка данных
-        JavaRDD<String> flights = sc.textFile("/users/Anemone/");
+        JavaRDD<String> flights = sc.textFile("/Users/anemone/parallelDevLabs/DevOfParallelAndDistrProgLab3/flights.csv");
+        
     }
 }
 
