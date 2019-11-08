@@ -2,6 +2,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 import java.util.Map;
 
@@ -42,9 +43,10 @@ public class ShowDelayFlights {
         // collectAsMap - Collect the result as a map to provide easy lookup
         Map<String, String> airMap = codeNamePairAirport.collectAsMap();
         //создаем в основном методе main переменную broadcast сюда кидаем пары код, имя аэропорта
-        final Broadcast<Map<String, AirportData>> airportsBroadcasted =
-                sc.broadcast(stringAirportDataMap);
+        final Broadcast<Map<String, String>> airportsBroadcasted =
+                sc.broadcast(airMap);
 
+        
     }
 }
 
