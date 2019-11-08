@@ -3,6 +3,7 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
+import scala.Array;
 import scala.Tuple2;
 
 import java.util.List;
@@ -55,7 +56,17 @@ public class ShowDelayFlights {
         //связать вывод с именами аэропортов
         //обогащаем его именами аэропортов, обращаясь внутри
         //функций к объекту airportsBroadcasted.value()
-        JavaPairRDD<Tuple2<String, String>, List<String>> res = TablesParser.resultPacking(reduceData);
+        JavaPairRDD<Tuple2<String, String>, List<String>> res =
+                reduceData.mapToPair(
+                        s->new Tuple2<>(s._1, //забираем пару код_дест, код_ориджин
+                                Arrays.asList(String.valueOf(s._2.delay)), //забрали макс делей
+                                String.format())
+                )
+
+                /*JavaPairRDD<String, Long> dictionary =
+                dictionaryFile.mapToPair(Hadoop
+                        s -> new Tuple2<>(Hadoop s,1l)
+                );*/
     }
 }
 
