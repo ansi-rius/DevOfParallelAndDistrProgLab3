@@ -49,7 +49,8 @@ public class ShowDelayFlights {
         //время опоздания, процент опоздавших+отмененных рейсов
         JavaPairRDD<Tuple2<String, String>, FlightKey> reduceData = originDestDelayCancelledFlightTuple.reduceByKey(TablesParser.reduce);
         //формируем строки для результата... res должен быть:
-        // name_origin, name_dest, maxDelay, %Of
+        // name_origin, name_dest, maxDelay, %OfLate, %OfCanceled
+        //связать вывод с именами аэропортов
     }
 }
 
