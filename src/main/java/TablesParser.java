@@ -27,8 +27,10 @@ public class TablesParser {
             double maxDelay;
             maxDelay = Math.max(flightKey.delay, flightKey2.delay);
             int count = flightKey.counter + flightKey2.counter;
-            int lateCount = flightKey.canceled + flightKey2.canceled;
+            int canc = flightKey.canceled + flightKey2.canceled;
+            int lat = flightKey.late + flightKey2.late;
+            FlightKey packedRes = new FlightKey(maxDelay, count, lat, canc);
             return null;
         }
-    }
+    };
 }
