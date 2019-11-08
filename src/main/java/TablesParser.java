@@ -6,7 +6,7 @@ public class TablesParser {
         /*JavaPairRDD<String, Long> wordsWithCount = splitted.mapToPair(
                 s -> new Tuple2<>(s, 1l)
         );*/
-        
+        .map
         return table;
     }
 }
