@@ -10,7 +10,7 @@ public class TablesParser {
                 s -> Arrays.stream(Hadoop s.split(Hadoop " ")).iterator(Hadoop )
         );*/
         table.filter(a-> !a.contains("Code"));
-        table.
+        table.flatMap()
         return table;
     }
 }
