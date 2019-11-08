@@ -24,7 +24,8 @@ public class TablesParser {
     Function2<FlightKey, FlightKey, FlightKey> reduce = new Function2<FlightKey, FlightKey, FlightKey>() {
         @Override
         public FlightKey call(FlightKey flightKey, FlightKey flightKey2) throws Exception {
-            double
+            double maxDelay;
+            
             return null;
         }
     }
