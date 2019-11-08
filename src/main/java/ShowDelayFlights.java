@@ -60,7 +60,8 @@ public class ShowDelayFlights {
                 reduceData.mapToPair(
                         s->new Tuple2<>(s._1, //забираем пару код_дест, код_ориджин
                                 Arrays.asList(String.valueOf(s._2.delay)), //забрали макс делей
-                                "",)
+                                ((double)(s._2.late/s._2.counter*100)), //%Oflate
+                                String.valueOf((double)(s._2.canceled/s._2.counter*100)));
                 )
 
                 /*JavaPairRDD<String, Long> dictionary =
