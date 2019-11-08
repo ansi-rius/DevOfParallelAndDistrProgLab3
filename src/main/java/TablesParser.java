@@ -21,7 +21,7 @@ public class TablesParser {
     }
     //Spark RDD reduceByKey function merges the values for each key using an associative reduce function.
     //Reduce Function
-    Function2<FlightKey, FlightKey, FlightKey> reduce = new Function2<FlightKey, FlightKey, FlightKey>() {
+    public static Function2<FlightKey, FlightKey, FlightKey> reduce = new Function2<FlightKey, FlightKey, FlightKey>() {
         @Override
         public FlightKey call(FlightKey flightKey, FlightKey flightKey2) throws Exception {
             double maxDelay;
