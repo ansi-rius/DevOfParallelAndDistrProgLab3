@@ -5,8 +5,11 @@ public class TablesParser {
         //принимаем строку, надо разсплитить..
         /*JavaPairRDD<String, Long> wordsWithCount = splitted.mapToPair(
                 s -> new Tuple2<>(s, 1l)
+        );
+        JavaRDD<String> splitted = distFile.flatMap(Hadoop
+                s -> Arrays.stream(Hadoop s.split(Hadoop " ")).iterator(Hadoop )
         );*/
-        .map
+        .filter
         return table;
     }
 }
