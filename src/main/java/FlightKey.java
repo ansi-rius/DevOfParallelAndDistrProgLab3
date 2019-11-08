@@ -15,9 +15,9 @@ public class FlightKey implements Serializable {
                     late = 1;
                 }
             }
-        } else { //если 1, то отменен, значит делея
+        } else { //если 1, то отменен, значит делея нет
             canceled = 1;
-
+            
         }
     }
 }
