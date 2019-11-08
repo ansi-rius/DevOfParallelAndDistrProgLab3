@@ -22,7 +22,11 @@ public class FlightKey implements Serializable {
         counter = 1; //общее кол-во
     }
 
-    FlightKey() {
+    FlightKey(double delay, int counter, int late, int canceled) {
+        this.delay = delay;
+        this.counter = counter;
+        this.late = late;
+        this.canceled = canceled;
 
     }
 }
