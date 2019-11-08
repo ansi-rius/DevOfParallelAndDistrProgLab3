@@ -1,5 +1,7 @@
 import org.apache.spark.api.java.JavaRDD;
 
+import java.util.Arrays;
+
 public class TablesParser {
     public static JavaRDD<String[]> splitAirportsTable(JavaRDD<String> table) {
         //принимаем строку, надо разсплитить..
@@ -10,7 +12,7 @@ public class TablesParser {
                 s -> Arrays.stream(Hadoop s.split(Hadoop " ")).iterator(Hadoop )
         );*/
         table.filter(a-> !a.contains("Code"));
-        table.flatMap()
+        table.flatMap(s -> Arrays.stream(s.split("")))
         return table;
     }
 }
