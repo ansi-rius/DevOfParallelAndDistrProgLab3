@@ -1,5 +1,6 @@
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.Function2;
 import scala.Tuple2;
 
 import java.util.Arrays;
@@ -19,5 +20,6 @@ public class TablesParser {
         //return flights;
     }
     //Spark RDD reduceByKey function merges the values for each key using an associative reduce function.
-
+    //Reduce Function
+    Function2<FlightKey, FlightKey, FlightKey> reduce
 }
