@@ -65,7 +65,8 @@ public class ShowDelayFlights {
         //связать вывод с именами аэропортов
         //обогащаем его именами аэропортов, обращаясь внутри
         //функций к объекту airportsBroadcasted.value()
-        
+        JavaRDD<List<String>> resFinal =
+                
     }
 }
 
