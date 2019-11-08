@@ -12,9 +12,10 @@ public class TablesParser {
                 );*/
         //Требуется определить для пары <аэропорт отлета, аэропорт прибытия>
         // s[11] s[14] - tuple2?
-        flights.mapToPair(s->new Tuple2<>(new Tuple2<>)) //s[11] - origin, s[14] - dest
+        return flights.mapToPair(s->new Tuple2<>(new Tuple2<>(s[11], s[14]), new FlightKey(s[18], s[19])));
+            //s[11] - origin, s[14] - dest
             //s[18] - arrDelayNew s[19] - cancelled
 
-        return flights;
+        //return flights;
     }
 }
