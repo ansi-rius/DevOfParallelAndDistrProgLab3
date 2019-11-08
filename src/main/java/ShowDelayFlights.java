@@ -4,6 +4,8 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
+
+import java.util.List;
 import java.util.Map;
 
 import java.util.Arrays;
@@ -53,7 +55,7 @@ public class ShowDelayFlights {
         //связать вывод с именами аэропортов
         //обогащаем его именами аэропортов, обращаясь внутри
         //функций к объекту airportsBroadcasted.value()
-        
+        JavaPairRDD<Tuple2<String, String>, List<String>> res = TablesParser.resultPacking(reduceData);
     }
 }
 
