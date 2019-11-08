@@ -51,6 +51,9 @@ public class ShowDelayFlights {
         //формируем строки для результата... res должен быть:
         // name_origin, name_dest, maxDelay, %OfLate, %OfCanceled
         //связать вывод с именами аэропортов
+        //обогащаем его именами аэропортов, обращаясь внутри
+        //функций к объекту airportsBroadcasted.value()
+        
     }
 }
 
