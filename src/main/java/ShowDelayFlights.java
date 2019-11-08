@@ -14,8 +14,9 @@ public class ShowDelayFlights {
         //загрузка данных
         JavaRDD<String> flights = sc.textFile("/Users/anemone/parallelDevLabs/DevOfParallelAndDistrProgLab3/flights.csv");
         JavaRDD<String> airports = sc.textFile("/Users/anemone/parallelDevLabs/DevOfParallelAndDistrProgLab3/airports.csv");
-
+        //Разбиение строки на слова
         
+
     }
 }
 
