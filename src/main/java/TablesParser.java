@@ -18,6 +18,6 @@ public class TablesParser {
 
         //return flights;
     }
-    
+    //Spark RDD reduceByKey function merges the values for each key using an associative reduce function.
 
 }
