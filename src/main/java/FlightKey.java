@@ -17,7 +17,12 @@ public class FlightKey implements Serializable {
             }
         } else { //если 1, то отменен, значит делея нет
             canceled = 1;
-            
+            delay = 0;
         }
+        counter = 1; //общее кол-во
+    }
+
+    FlightKey() {
+
     }
 }
