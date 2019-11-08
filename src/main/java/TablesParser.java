@@ -13,7 +13,6 @@ public class TablesParser {
         );*/
         table.filter(a-> !a.contains("Code"));
         table.map(s -> Arrays.stream(s.split(",(?=\")")));
-        table.to
         return table;
     }
 }
