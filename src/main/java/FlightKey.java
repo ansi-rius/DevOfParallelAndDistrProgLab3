@@ -11,7 +11,9 @@ public class FlightKey implements Serializable {
                 delay = 0;
             } else {
                 delay = Double.parseDouble(del); //если не пусто, то есть значение, забираем его
-                
+                if (delay != 0) { //
+
+                }
             }
         }
     }
