@@ -9,7 +9,7 @@ public class TablesParser {
         JavaRDD<String> splitted = distFile.flatMap(Hadoop
                 s -> Arrays.stream(Hadoop s.split(Hadoop " ")).iterator(Hadoop )
         );*/
-        .filter(a-> !a.);
+        .filter(a-> !a.contsins(""));
         return table;
     }
 }
