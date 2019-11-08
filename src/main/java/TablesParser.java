@@ -12,8 +12,8 @@ public class TablesParser {
                 s -> Arrays.stream(Hadoop s.split(Hadoop " ")).iterator(Hadoop )
         );*/
         table.filter(a-> !a.contains("Code"));
-        table.map(s -> Arrays.stream(s.split(",(?=\")")));
-        table.toArray(String[]::new);
+        table.map(s -> Arrays.stream(s.split(",(?=\")"))
+                .toArray(String[]::new));
         return table;
     }
 }
