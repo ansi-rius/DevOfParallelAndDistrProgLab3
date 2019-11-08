@@ -53,21 +53,19 @@ public class ShowDelayFlights {
         JavaPairRDD<Tuple2<String, String>, FlightKey> reduceData = originDestDelayCancelledFlightTuple.reduceByKey(TablesParser.reduce);
         //формируем строки для результата... res должен быть:
         // name_origin, name_dest, maxDelay, %OfLate, %OfCanceled
-        //связать вывод с именами аэропортов
-        //обогащаем его именами аэропортов, обращаясь внутри
-        //функций к объекту airportsBroadcasted.value()
+
         JavaPairRDD<Tuple2<String, String>, List<String>> res =
                 reduceData.mapToPair(
                         s->new Tuple2<>(s._1, //забираем пару код_дест, код_ориджин
-                                Arrays.asList(String.valueOf(s._2.delay)), //забрали макс делей
-                                ((double)(s._2.late/s._2.counter*100)), //%Oflate
-                                String.valueOf((double)(s._2.canceled/s._2.counter*100)));
-                )
+                                Arrays.asList(String.valueOf(s._2.delay), //забрали макс делей
+                                String.format("%.2f %%",((double)s._2.late/s._2.counter*100)), //%Oflate
+                                String.format("%.2f %%",((double)s._2.canceled/s._2.counter*100))
+                                )));
 
-                /*JavaPairRDD<String, Long> dictionary =
-                dictionaryFile.mapToPair(Hadoop
-                        s -> new Tuple2<>(Hadoop s,1l)
-                );*/
+        //связать вывод с именами аэропортов
+        //обогащаем его именами аэропортов, обращаясь внутри
+        //функций к объекту airportsBroadcasted.value()
+        
     }
 }
 
