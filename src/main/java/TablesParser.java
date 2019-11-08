@@ -10,7 +10,8 @@ public class TablesParser {
                 dictionaryFile.mapToPair(Hadoop
                         s -> new Tuple2<>(Hadoop s,1l)
                 );*/
-        flights.mapToPair(s->new Tuple2<> ()) //s[11] - origin, 
+        flights.mapToPair(s->new Tuple2<> ()) //s[11] - origin, s[14] - dest
+            //
         return flights;
     }
 }
