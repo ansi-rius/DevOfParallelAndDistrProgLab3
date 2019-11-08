@@ -24,7 +24,7 @@ public class ShowDelayFlights {
         JavaRDD<String[]> airports =
                 airportsTable.filter(a-> !a.contains("Code"))
                 .map(s -> Arrays.stream(s.split(",(?=\")"))
-                        .toArray(String[]::new));
+                );
 
         JavaRDD<String[]> flights =
                 flightsTable.filter(a-> !a.contains("\"YEAR\""))
