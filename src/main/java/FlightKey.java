@@ -11,10 +11,13 @@ public class FlightKey implements Serializable {
                 delay = 0;
             } else {
                 delay = Double.parseDouble(del); //если не пусто, то есть значение, забираем его
-                if (delay != 0) { //
-
+                if (delay != 0) { //если есть значение не 0, то опаздывал
+                    late = 1;
                 }
             }
+        } else { //
+            canceled = 1;
+
         }
     }
 }
