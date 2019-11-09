@@ -25,7 +25,8 @@ public class TablesParser {
         @Override
         public FlightKey call(FlightKey flightKey, FlightKey flightKey2) throws Exception {
             double maxDelay;
-            maxDelay = Math.max(flightKey.delay, flightKey2.delay);
+            //maxDelay = Math.max(flightKey.delay, flightKey2.delay);
+            
             int count = flightKey.counter + flightKey2.counter;
             int canc = flightKey.canceled + flightKey2.canceled;
             int lat = flightKey.late + flightKey2.late;
