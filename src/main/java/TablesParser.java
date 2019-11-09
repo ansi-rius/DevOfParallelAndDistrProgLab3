@@ -4,8 +4,28 @@ import org.apache.spark.api.java.function.Function2;
 import scala.Tuple2;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class TablesParser {
+
+    public static JavaRDD<String[]> splitAirportsTable(JavaRDD<String> airportsTable) {
+        return airportsTable.filter(a-> !a.contains("Code"))
+                .map(s -> Arrays.stream(s.split(",(?=\")"))
+                        .toArray(String[]::new));
+
+    }
+
+    public static JavaRDD<String[]> splitFlightsTable(JavaRDD<String> flightsTable) {
+        return flightsTable.filter(a-> !a.contains("\"YEAR\""))
+                .map(s->Arrays.stream(s.split(","))
+                        .toArray(String[]::new));
+    }
+
+    public static JavaPairRDD<String, String> makeAirportPairs(JavaRDD<String[]> airports) {
+        return airports.mapToPair(a-> new Tuple2<>(a[0].replace("\"", ""), a[1]) //убрали лишнее
+        );
+    }
+
     public static JavaPairRDD<Tuple2<String,String>, FlightKey> makeFlightPair(JavaRDD<String[]> flights) {
         /*JavaPairRDD<String, Long> dictionary =
                 dictionaryFile.mapToPair(Hadoop
@@ -19,19 +39,14 @@ public class TablesParser {
 
         //return flights;
     }
-    //Spark RDD reduceByKey function merges the values for each key using an associative reduce function.
-    //Reduce Function
-    public static Function2<FlightKey, FlightKey, FlightKey> reduce = new Function2<FlightKey, FlightKey, FlightKey>() {
-        @Override
-        public FlightKey call(FlightKey flightKey, FlightKey flightKey2) throws Exception {
-            double maxDelay;
-            maxDelay = Math.max(flightKey.delay, flightKey2.delay);
-            int count = flightKey.counter + flightKey2.counter;
-            int canc = flightKey.canceled + flightKey2.canceled;
-            int lat = flightKey.late + flightKey2.late;
-            FlightKey packedRes = new FlightKey(maxDelay, count, lat, canc);
-            return packedRes;
-        }
-    };
+
+    public static JavaPairRDD<Tuple2<String, String>, List<String>> writeRes(JavaPairRDD<Tuple2<String, String>, FlightKey> reduceData) {
+        return reduceData.mapToPair(
+                s->new Tuple2<>(s._1, //забираем пару код_дест, код_ориджин
+                        Arrays.asList(String.valueOf(s._2.delay), //забрали макс делей
+                                String.format("%.2f %%",((double)s._2.late/s._2.counter*100)), //% Of late
+                                String.format("%.2f %%",((double)s._2.canceled/s._2.counter*100))
+                        )));
+    }
 
 }

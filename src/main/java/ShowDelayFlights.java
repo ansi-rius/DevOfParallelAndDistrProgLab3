@@ -22,23 +22,16 @@ public class ShowDelayFlights {
         JavaRDD<String> flightsTable = sc.textFile("flights.csv");
         JavaRDD<String> airportsTable = sc.textFile("airports.csv");
         //Разбиение строки на слова - splits распарсить..
-        JavaRDD<String[]> airports =
-                airportsTable.filter(a-> !a.contains("Code"))
-                .map(s -> Arrays.stream(s.split(",(?=\")"))
-                        .toArray(String[]::new));
+        JavaRDD<String[]> airports = TablesParser.splitAirportsTable(airportsTable);
 
-        JavaRDD<String[]> flights =
-                flightsTable.filter(a-> !a.contains("\"YEAR\""))
-                .map(s->Arrays.stream(s.split(","))
-                        .toArray(String[]::new));
+        JavaRDD<String[]> flights = TablesParser.splitFlightsTable(flightsTable);
+
         //формируем пары <название аеропорта, его код>
         /*JavaPairRDD<String, Long> dictionary =
                 dictionaryFile.mapToPair(Hadoop
                         s -> new Tuple2<>(Hadoop s,1l)
                 );*/
-        JavaPairRDD<String, String> codeNamePairAirport =
-                airports.mapToPair(a-> new Tuple2<>(a[0].replace("\"", ""), a[1]) //убрали лишнее
-                );
+        JavaPairRDD<String, String> codeNamePairAirport = TablesParser.makeAirportPairs(airports);
 
         //делаем задание лабы - связываем тюпл<название, код> с (<код вылета, код прилета>, <делей, кенселед>)
         JavaPairRDD<Tuple2<String,String>, FlightKey> originDestDelayCancelledFlightTuple = TablesParser.makeFlightPair(flights); //?
@@ -47,22 +40,14 @@ public class ShowDelayFlights {
         // collectAsMap - Collect the result as a map to provide easy lookup
         Map<String, String> airMap = codeNamePairAirport.collectAsMap();
         //создаем в основном методе main переменную broadcast сюда кидаем пары код, имя аэропорта
-        final Broadcast<Map<String, String>> airportsBroadcasted =
-                sc.broadcast(airMap);
+        final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airMap);
         //c помощью функции reduce или аналогичных расчитываем максимальное
         //время опоздания, процент опоздавших+отмененных рейсов
-        JavaPairRDD<Tuple2<String, String>, FlightKey> reduceData = originDestDelayCancelledFlightTuple.reduceByKey(TablesParser.reduce);
+        JavaPairRDD<Tuple2<String, String>, FlightKey> reduceData = originDestDelayCancelledFlightTuple.reduceByKey(reduceMethod.REDUCE);
         //формируем строки для результата... res должен быть:a
         // name_origin, name_dest, maxDelay, %OfLate, %OfCanceled
 
-        JavaPairRDD<Tuple2<String, String>, List<String>> res =
-                reduceData.mapToPair(
-                        s->new Tuple2<>(s._1, //забираем пару код_дест, код_ориджин
-                                Arrays.asList(String.valueOf(s._2.delay), //забрали макс делей
-                                String.format("%.2f %%",((double)s._2.late/s._2.counter*100)), //% Of late
-                                String.format("%.2f %%",((double)s._2.canceled/s._2.counter*100))
-                                )));
-
+        JavaPairRDD<Tuple2<String, String>, List<String>> res = TablesParser.writeRes(reduceData);
         //связать вывод с именами аэропортов
         //обогащаем его именами аэропортов, обращаясь внутри
         //функций к объекту airportsBroadcasted.value()
