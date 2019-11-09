@@ -15,9 +15,9 @@ import java.util.Arrays;
 public class ShowDelayFlights {
     public static void main(String[] args) {
         //инициализация приложения
-        SparkConf conf = new SparkConf().setMaster("spark://master");
+        SparkConf conf = new SparkConf().setAppName("example");
         JavaSparkContext sc = new JavaSparkContext(conf);
-        //val conf = new SparkConf().setMaster("spark://master"); //missing
+        
         //загрузка данных
         JavaRDD<String> flightsTable = sc.textFile("flights.csv");
         JavaRDD<String> airportsTable = sc.textFile("airports.csv");
