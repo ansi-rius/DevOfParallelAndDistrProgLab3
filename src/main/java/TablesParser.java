@@ -35,7 +35,7 @@ public class TablesParser {
             int canc = flightKey.canceled + flightKey2.canceled;
             int lat = flightKey.late + flightKey2.late;
             FlightKey packedRes = new FlightKey(maxDelay, count, lat, canc);
-            return null;
+            return packedRes;
         }
     };
 }
