@@ -52,7 +52,7 @@ public class ShowDelayFlights {
         //c помощью функции reduce или аналогичных расчитываем максимальное
         //время опоздания, процент опоздавших+отмененных рейсов
         JavaPairRDD<Tuple2<String, String>, FlightKey> reduceData = originDestDelayCancelledFlightTuple.reduceByKey(TablesParser.reduce);
-        //формируем строки для результата... res должен быть:
+        //формируем строки для результата... res должен быть:a
         // name_origin, name_dest, maxDelay, %OfLate, %OfCanceled
 
         JavaPairRDD<Tuple2<String, String>, List<String>> res =
