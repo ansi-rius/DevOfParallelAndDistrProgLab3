@@ -7,17 +7,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TablesParser {
+    private static final String AIRPORT_HEADER = "Code";
+    private static final String FLIGHTS_HEADER = "\"YEAR\"";
+    private static final String AIR_DECLAIMER = ",(?=\")";
+    private static final String FLIGHT_DECLAIMER = ",";
 
     public static JavaRDD<String[]> splitAirportsTable(JavaRDD<String> airportsTable) {
-        return airportsTable.filter(a-> !a.contains("Code"))
-                .map(s -> Arrays.stream(s.split(",(?=\")"))
+        return airportsTable.filter(a-> !a.contains(AIRPORT_HEADER))
+                .map(s -> Arrays.stream(s.split(AIR_DECLAIMER))
                         .toArray(String[]::new));
 
     }
 
     public static JavaRDD<String[]> splitFlightsTable(JavaRDD<String> flightsTable) {
-        return flightsTable.filter(a-> !a.contains("\"YEAR\""))
-                .map(s->Arrays.stream(s.split(","))
+        return flightsTable.filter(a-> !a.contains(FLIGHTS_HEADER))
+                .map(s->Arrays.stream(s.split(FLIGHT_DECLAIMER))
                         .toArray(String[]::new));
     }
 
