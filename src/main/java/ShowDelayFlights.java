@@ -18,8 +18,8 @@ public class ShowDelayFlights {
         SparkConf conf = new SparkConf().setAppName("example");
         JavaSparkContext sc = new JavaSparkContext(conf);
         //загрузка данных
-        JavaRDD<String> flightsTable = sc.textFile("/Users/anemone/parallelDevLabs/DevOfParallelAndDistrProgLab3/flights.csv");
-        JavaRDD<String> airportsTable = sc.textFile("/Users/anemone/parallelDevLabs/DevOfParallelAndDistrProgLab3/airports.csv");
+        JavaRDD<String> flightsTable = sc.textFile("/Users/anemone/flights.csv");
+        JavaRDD<String> airportsTable = sc.textFile("/Users/anemone/airports.csv");
         //Разбиение строки на слова - splits распарсить..
         JavaRDD<String[]> airports =
                 airportsTable.filter(a-> !a.contains("Code"))
