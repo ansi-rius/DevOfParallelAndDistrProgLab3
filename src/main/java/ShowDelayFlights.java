@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class ShowDelayFlights {
     public static void main(String[] args) {
         //инициализация приложения
-        SparkConf conf = new SparkConf().setAppName("lab3").setMaster();
+        SparkConf conf = new SparkConf().setAppName("lab3").setMaster("local[2]");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         //загрузка данных
