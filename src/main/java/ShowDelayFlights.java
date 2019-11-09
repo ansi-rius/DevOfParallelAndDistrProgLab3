@@ -5,7 +5,6 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
 
 import scala.Tuple2;
-
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +24,6 @@ public class ShowDelayFlights {
         JavaRDD<String[]> airports = TablesParser.splitAirportsTable(airportsTable);
 
         JavaRDD<String[]> flights = TablesParser.splitFlightsTable(flightsTable);
-
         //формируем пары <название аеропорта, его код>
         /*JavaPairRDD<String, Long> dictionary =
                 dictionaryFile.mapToPair(Hadoop
