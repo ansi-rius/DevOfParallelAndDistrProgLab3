@@ -3,7 +3,7 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
-import scala.Array;
+
 import scala.Tuple2;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class ShowDelayFlights {
         //инициализация приложения
         SparkConf conf = new SparkConf().setAppName("example");
         JavaSparkContext sc = new JavaSparkContext(conf);
-        
+
         //загрузка данных
         JavaRDD<String> flightsTable = sc.textFile("flights.csv");
         JavaRDD<String> airportsTable = sc.textFile("airports.csv");
