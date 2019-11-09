@@ -54,6 +54,7 @@ public class ShowDelayFlights {
         JavaRDD<List<String>> resFinal =
                 res.map( s -> Arrays.asList(airportsBroadcasted.value().get(s._1._1),
                         airportsBroadcasted.value().get(s._1._2), String.valueOf(s._2)));
+
         resFinal.saveAsTextFile("flightoutput2");
     }
 }
